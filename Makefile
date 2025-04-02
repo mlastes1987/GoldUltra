@@ -1,11 +1,11 @@
 roms := \
-	pokegold.gbc \
-	pokesilver.gbc \
-	pokegold_debug.gbc \
-	pokesilver_debug.gbc
+	GoldUltra.gbc \
+	SilverUltra.gbc \
+	GoldUltra_debug.gbc \
+	SilverUltra_debug.gbc
 patches := \
-	pokegold.patch \
-	pokesilver.patch
+	GoldUltra.patch \
+	SilverUltra.patch
 
 rom_obj := \
 	audio.o \
@@ -34,12 +34,12 @@ silver_debug_excl_obj := $(addsuffix _silver_debug.o,$(gs_excl_asm))
 gold_vc_excl_obj      := $(addsuffix _gold_vc.o,$(gs_excl_asm))
 silver_vc_excl_obj    := $(addsuffix _silver_vc.o,$(gs_excl_asm))
 
-pokegold_obj          := $(rom_obj:.o=_gold.o) $(gold_excl_obj)
-pokesilver_obj        := $(rom_obj:.o=_silver.o) $(silver_excl_obj)
-pokegold_debug_obj    := $(rom_obj:.o=_gold_debug.o) $(gold_debug_excl_obj)
-pokesilver_debug_obj  := $(rom_obj:.o=_silver_debug.o) $(silver_debug_excl_obj)
-pokegold_vc_obj       := $(rom_obj:.o=_gold_vc.o) $(gold_vc_excl_obj)
-pokesilver_vc_obj     := $(rom_obj:.o=_silver_vc.o) $(silver_vc_excl_obj)
+GoldUltra_obj          := $(rom_obj:.o=_gold.o) $(gold_excl_obj)
+SilverUltra_obj        := $(rom_obj:.o=_silver.o) $(silver_excl_obj)
+GoldUltra_debug_obj    := $(rom_obj:.o=_gold_debug.o) $(gold_debug_excl_obj)
+SilverUltra_debug_obj  := $(rom_obj:.o=_silver_debug.o) $(silver_debug_excl_obj)
+GoldUltra_vc_obj       := $(rom_obj:.o=_gold_vc.o) $(gold_vc_excl_obj)
+SilverUltra_vc_obj     := $(rom_obj:.o=_silver_vc.o) $(silver_vc_excl_obj)
 
 
 ### Build tools
@@ -66,12 +66,12 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDARY:
 
 all: $(roms)
-gold:         pokegold.gbc
-silver:       pokesilver.gbc
-gold_debug:   pokegold_debug.gbc
-silver_debug: pokesilver_debug.gbc
-gold_vc:      pokegold.patch
-silver_vc:    pokesilver.patch
+gold:         GoldUltra.gbc
+silver:       SilverUltra.gbc
+gold_debug:   GoldUltra_debug.gbc
+silver_debug: SilverUltra_debug.gbc
+gold_vc:      GoldUltra.patch
+silver_vc:    SilverUltra.patch
 
 clean: tidy
 	find gfx \
@@ -91,12 +91,12 @@ tidy:
 	      $(patches:.patch=_vc.sym) \
 	      $(patches:.patch=_vc.map) \
 	      $(patches:%.patch=vc/%.constants.sym) \
-	      $(pokegold_obj) \
-	      $(pokesilver_obj) \
-	      $(pokegold_vc_obj) \
-	      $(pokesilver_vc_obj) \
-	      $(pokegold_debug_obj) \
-	      $(pokesilver_debug_obj) \
+	      $(GoldUltra_obj) \
+	      $(SilverUltra_obj) \
+	      $(GoldUltra_vc_obj) \
+	      $(SilverUltra_vc_obj) \
+	      $(GoldUltra_debug_obj) \
+	      $(SilverUltra_debug_obj) \
 	      rgbdscheck.o
 	$(MAKE) clean -C tools/
 
@@ -113,12 +113,12 @@ ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
 endif
 
-$(pokegold_obj):         RGBASMFLAGS += -D _GOLD
-$(pokesilver_obj):       RGBASMFLAGS += -D _SILVER
-$(pokegold_debug_obj):   RGBASMFLAGS += -D _GOLD -D _DEBUG
-$(pokesilver_debug_obj): RGBASMFLAGS += -D _SILVER -D _DEBUG
-$(pokegold_vc_obj):      RGBASMFLAGS += -D _GOLD -D _GOLD_VC
-$(pokesilver_vc_obj):    RGBASMFLAGS += -D _SILVER -D _GOLD_VC
+$(GoldUltra_obj):         RGBASMFLAGS += -D _GOLD
+$(SilverUltra_obj):       RGBASMFLAGS += -D _SILVER
+$(GoldUltra_debug_obj):   RGBASMFLAGS += -D _GOLD -D _DEBUG
+$(SilverUltra_debug_obj): RGBASMFLAGS += -D _SILVER -D _DEBUG
+$(GoldUltra_vc_obj):      RGBASMFLAGS += -D _GOLD -D _GOLD_VC
+$(SilverUltra_vc_obj):    RGBASMFLAGS += -D _SILVER -D _GOLD_VC
 
 %.patch: %_vc.gbc %.gbc vc/%.patch.template
 	tools/make_patch $*_vc.sym $^ $@
@@ -170,12 +170,12 @@ $(foreach obj, $(silver_vc_excl_obj), \
 endif
 
 
-pokegold_opt         = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
-pokesilver_opt       = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
-pokegold_debug_opt   = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
-pokesilver_debug_opt = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
-pokegold_vc_opt      = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
-pokesilver_vc_opt    = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+GoldUltra_opt         = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+SilverUltra_opt       = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+GoldUltra_debug_opt   = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+SilverUltra_debug_opt = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+GoldUltra_vc_opt      = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+SilverUltra_vc_opt    = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
 
 %.gbc: $$(%_obj) layout.link
 	$(RGBLINK) -n $*.sym -m $*.map -l layout.link -o $@ $(filter %.o,$^)
