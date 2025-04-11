@@ -45,7 +45,7 @@ ItemDescriptions:
 	dw SuperRepelDesc
 	dw MaxRepelDesc
 	dw DireHitDesc
-	dw TeruSama3Desc
+	dw PocketPCDesc
 	dw FreshWaterDesc
 	dw SodaPopDesc
 	dw LemonadeDesc
@@ -57,7 +57,7 @@ ItemDescriptions:
 	dw CoinCaseDesc
 	dw ItemfinderDesc
 	dw TeruSama5Desc
-	dw ExpShareDesc
+	dw ExpAllDesc
 	dw OldRodDesc
 	dw GoodRodDesc
 	dw SilverLeafDesc
@@ -436,8 +436,9 @@ DireHitDesc:
 	db   "Ups critical hit"
 	next "ratio. (1 BTL)@"
 
-TeruSama3Desc:
-	db   "?@"
+PocketPCDesc:
+	db   "Access the PC"
+	next "right here!@"
 
 FreshWaterDesc:
 	db   "Restores #MON"
@@ -481,7 +482,7 @@ ItemfinderDesc:
 TeruSama5Desc:
 	db   "?@"
 
-ExpShareDesc:
+ExpAllDesc:
 	db   "Shares battle EXP."
 	next "points.@"
 

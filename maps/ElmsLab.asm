@@ -121,7 +121,7 @@ CyndaquilPokeBallScript:
 	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
-	setval CYNDAQUIL
+	setval HOUNDOUR
 	callasm ElmsLabTempSetOwned
 	special ShowPokedexEntry
 	callasm ElmsLabUnsetOwned
@@ -134,12 +134,12 @@ CyndaquilPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	getmonname STRING_BUFFER_3, CYNDAQUIL
+	getmonname STRING_BUFFER_3, HOUNDOUR
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke CYNDAQUIL, 5, BERRY
+	givepoke HOUNDOUR, 5, BERRY
 	closetext
 	readvar VAR_FACING
 	ifequal RIGHT, ElmDirectionsScript
@@ -151,7 +151,7 @@ TotodilePokeBallScript:
 	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
-	setval TOTODILE
+	setval WOOPER
 	callasm ElmsLabTempSetOwned
 	special ShowPokedexEntry
 	callasm ElmsLabUnsetOwned
@@ -164,12 +164,12 @@ TotodilePokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	getmonname STRING_BUFFER_3, TOTODILE
+	getmonname STRING_BUFFER_3, WOOPER
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke TOTODILE, 5, BERRY
+	givepoke WOOPER, 5, BERRY
 	closetext
 	applymovement PLAYER, AfterTotodileMovement
 	sjump ElmDirectionsScript
@@ -417,6 +417,7 @@ AideScript_WalkPotion1:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight1
 	turnobject PLAYER, DOWN
 	scall AideScript_GivePotion
+	scall AideScript_GivePocketPC
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft1
 	end
 
@@ -424,6 +425,7 @@ AideScript_WalkPotion2:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight2
 	turnobject PLAYER, DOWN
 	scall AideScript_GivePotion
+	scall AideScript_GivePocketPC
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft2
 	end
 
@@ -435,6 +437,16 @@ AideScript_GivePotion:
 	writetext AideText_AlwaysBusy
 	waitbutton
 	closetext
+	end
+
+AideScript_GivePocketPC:
+	opentext
+	writetext AideText_GetPocketPCText
+	promptbutton
+	verbosegiveitem POCKET_PC
+	writetext AideText_PocketPCInfoText
+	waitbutton
+	closetext
 	setscene SCENE_ELMSLAB_NOOP
 	end
 
@@ -442,6 +454,7 @@ AideScript_WalkBalls1:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight1
 	turnobject PLAYER, DOWN
 	scall AideScript_GiveYouBalls
+	scall AideScript_GiveYouEXPAll
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft1
 	end
 
@@ -449,6 +462,7 @@ AideScript_WalkBalls2:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight2
 	turnobject PLAYER, DOWN
 	scall AideScript_GiveYouBalls
+	scall AideScript_GiveYouEXPAll
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft2
 	end
 
@@ -463,11 +477,21 @@ AideScript_GiveYouBalls:
 	promptbutton
 	itemnotify
 	closetext
-	setscene SCENE_ELMSLAB_NOOP
 	end
 
 AideScript_ReceiveTheBalls:
 	jumpstd ReceiveItemScript
+	end
+
+AideScript_GiveYouEXPAll:
+	opentext
+	writetext AideText_GiveEXPAllText
+	promptbutton
+	verbosegiveitem EXP_ALL
+	writetext AideText_EXPAllInfoText
+	waitbutton
+	closetext
+	setscene SCENE_ELMSLAB_NOOP
 	end
 
 ElmsAideScript:
@@ -736,19 +760,19 @@ LabWhereGoingText:
 
 TakeCyndaquilText:
 	text "ELM: You'll take"
-	line "CYNDAQUIL, the"
+	line "HOUNDOUR, the"
 	cont "fire #MON?"
 	done
 
 TakeTotodileText:
 	text "ELM: Do you want"
-	line "TOTODILE, the"
+	line "WOOPER, the"
 	cont "water #MON?"
 	done
 
 TakeChikoritaText:
 	text "ELM: So, you like"
-	line "CHIKORITA, the"
+	line "SHROOMISH, the"
 	cont "grass #MON?"
 	done
 
@@ -1097,6 +1121,18 @@ AideText_AlwaysBusy:
 	cont "always busy."
 	done
 
+AideText_GetPocketPCText:
+	text "Oh, I have this"
+	line "for you too."
+
+	para "It's a Pocket PC!"
+	done
+	
+AideText_PocketPCInfoText:
+	text "Use this to manage"
+	line "your party."
+	done
+
 AideText_TheftTestimony:
 	text "There was a loud"
 	line "noise outside…"
@@ -1137,6 +1173,18 @@ AideText_ExplainBalls:
 	para "Throw # BALLS"
 	line "at wild #MON"
 	cont "to get them."
+	done
+
+AideText_GiveEXPAllText:
+	text "Oh, I have this"
+	line "for you too."
+
+	para "It's an EXP.ALL!"
+	done
+	
+AideText_EXPAllInfoText:
+	text "Share EXP"
+	line "with your #MON!"
 	done
 
 ElmsLabOfficerText1:

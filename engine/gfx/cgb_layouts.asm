@@ -692,9 +692,10 @@ _CGB_TrainerCard:
 	call LoadHLPaletteIntoDE
 	; palette for the badges when visible
 	ld de, wOBPals1
-	ld a, PAL_GRAYMON
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
+	ld hl, .BadgePalettes
+	ld bc, 8 palettes
+	ld a, BANK(wOBPals1)
+	call FarCopyWRAM
 
 	; fill screen with gender-specific palette for the card border
 	hlcoord 0, 0, wAttrmap
@@ -727,6 +728,9 @@ _CGB_TrainerCard:
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
+
+.BadgePalettes:
+INCLUDE "gfx/trainer_card/johto_badges.pal"
 
 _CGB_MoveList:
 	ld de, wBGPals1

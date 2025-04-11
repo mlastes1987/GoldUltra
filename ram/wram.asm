@@ -1147,7 +1147,7 @@ NEXTU
 ; trainer card badges
 wTrainerCardBadgeFrameCounter:: db
 wTrainerCardBadgeTileID:: db
-wTrainerCardBadgeAttributes:: db
+wTrainerCardBadgePaletteAddr:: dw
 
 NEXTU
 ; slot machine
@@ -2449,7 +2449,6 @@ wRegisteredItem:: db
 wPlayerState:: db
 
 wHallOfFameCount:: db
-
 wExpAllToggle:: db
 
 wTradeFlags:: flag_array NUM_NPC_TRADES

@@ -462,4 +462,6 @@ TrainerHouse:
 	ld [wScriptVar], a
 	jp CloseSRAM
 
-	nop ; unused
+TradebackNPC:
+	farcall TradebackGuy
+	ret
