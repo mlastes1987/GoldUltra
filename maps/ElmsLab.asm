@@ -417,6 +417,7 @@ AideScript_WalkPotion1:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight1
 	turnobject PLAYER, DOWN
 	scall AideScript_GivePotion
+	scall AideScript_GivePocketPC
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft1
 	end
 
@@ -424,6 +425,7 @@ AideScript_WalkPotion2:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight2
 	turnobject PLAYER, DOWN
 	scall AideScript_GivePotion
+	scall AideScript_GivePocketPC
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft2
 	end
 
@@ -435,6 +437,16 @@ AideScript_GivePotion:
 	writetext AideText_AlwaysBusy
 	waitbutton
 	closetext
+	end
+
+AideScript_GivePocketPC:
+	opentext
+	writetext AideText_GetPocketPCText
+	promptbutton
+	verbosegiveitem POCKET_PC
+	writetext AideText_PocketPCInfoText
+	waitbutton
+	closetext
 	setscene SCENE_ELMSLAB_NOOP
 	end
 
@@ -442,6 +454,7 @@ AideScript_WalkBalls1:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight1
 	turnobject PLAYER, DOWN
 	scall AideScript_GiveYouBalls
+	scall AideScript_GiveYouEXPShare
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft1
 	end
 
@@ -449,6 +462,7 @@ AideScript_WalkBalls2:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksRight2
 	turnobject PLAYER, DOWN
 	scall AideScript_GiveYouBalls
+	scall AideScript_GiveYouEXPShare
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft2
 	end
 
@@ -462,6 +476,16 @@ AideScript_GiveYouBalls:
 	writetext AideText_ExplainBalls
 	promptbutton
 	itemnotify
+	closetext
+	end
+
+AideScript_GiveYouEXPShare:
+	opentext
+	writetext AideText_GetEXPShareText
+	promptbutton
+	verbosegiveitem EXP_SHARE
+	writetext AideText_EXPShareInfoText
+	waitbutton
 	closetext
 	setscene SCENE_ELMSLAB_NOOP
 	end
@@ -1082,6 +1106,18 @@ AideText_AlwaysBusy:
 	cont "always busy."
 	done
 
+AideText_GetPocketPCText:
+	text "Oh, I have this"
+	line "for you too."
+
+	para "It's a Pocket PC!"
+	done
+	
+AideText_PocketPCInfoText:
+	text "Use this to manage"
+	line "your party."
+	done
+
 AideText_TheftTestimony:
 	text "There was a loud"
 	line "noise outside…"
@@ -1122,6 +1158,18 @@ AideText_ExplainBalls:
 	para "Throw # BALLS"
 	line "at wild #MON"
 	cont "to get them."
+	done
+
+AideText_GetEXPShareText:
+	text "Oh, I have this"
+	line "for you too."
+
+	para "It's an EXP. SHARE!"
+	done
+	
+AideText_EXPShareInfoText:
+	text "Give EXP to your"
+	line "party."
 	done
 
 ElmsLabOfficerText1:

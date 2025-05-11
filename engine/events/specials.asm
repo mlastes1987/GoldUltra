@@ -459,3 +459,7 @@ TrainerHouse:
 	jp CloseSRAM
 
 	nop ; unused
+
+TradebackNPC:
+	farcall TradebackGuy
+	ret
