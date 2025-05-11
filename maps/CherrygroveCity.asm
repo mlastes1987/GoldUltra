@@ -212,8 +212,8 @@ CherrygroveYoungster2Script:
 	faceplayer
 	opentext
 	writetext CherrygroveYoungster2Text1
-	verbosegiveitem RARE_CANDY, 99
 	promptbutton
+	verbosegiveitem RARE_CANDY, 99
 	writetext CherrygroveYoungster2Text2
 	waitbutton
 	closetext
@@ -223,8 +223,8 @@ CherrygroveYoungster3Script:
 	faceplayer
 	opentext
 	writetext CherrygroveYoungster3Text1
-	verbosegiveitem MASTER_BALL, 99
 	promptbutton
+	verbosegiveitem MASTER_BALL, 99
 	writetext CherrygroveYoungster3Text2
 	waitbutton
 	closetext
