@@ -25,7 +25,7 @@ ItemDescriptions:
 	dw FireStoneDesc
 	dw ThunderStoneDesc
 	dw WaterStoneDesc
-	dw PocketPCDesc
+	dw TeruSama2Desc
 	dw HPUpDesc
 	dw ProteinDesc
 	dw IronDesc
@@ -355,9 +355,8 @@ WaterStoneDesc:
 	db   "Evolves certain"
 	next "kinds of #MON.@"
 
-PocketPCDesc:
-	db   "Access the PC"
-	next "right here!@"
+TeruSama2Desc:
+	db   "?@"
 
 HPUpDesc:
 	db   "Raises the HP of"
