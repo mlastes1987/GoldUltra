@@ -1642,7 +1642,7 @@ wMartType:: db
 wMartPointerBank:: db
 wMartPointer:: dw
 wMartJumptableIndex:: db
-wBargainShopFlags:: db
+wBargainShopFlags:: dw
 
 NEXTU
 ; player movement data
